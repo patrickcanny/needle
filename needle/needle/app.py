@@ -8,14 +8,14 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 app.debug = True
 
 ############################
+#                   Classes
+############################
+class UserForm(Form):
+    username = StringField(u'Enter Spotify User To Roast:', validators = [validators.input_required()])
+
+############################
 #                   Functions
 ############################
-<<<<<<< Updated upstream
-#def authorizeUser():
-=======
-# def authorizeUser():
->>>>>>> Stashed changes
-    #Spotify Authentication Stuff Goes Here
 
 ############################
 #                   Routes
@@ -26,7 +26,11 @@ def login():
 
 @app.route("/main", methods = ['GET','POST'])
 def main():
-    return render_template("main.html")
+    form = UserForm(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.username.data
+
+    return render_template("main.html", form= form)
 
 @app.route("/playlists", methods = ['GET','POST'])
 def playlists():
