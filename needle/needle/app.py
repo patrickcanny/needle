@@ -10,7 +10,11 @@ app.debug = True
 ############################
 #                   Functions
 ############################
+<<<<<<< Updated upstream
 #def authorizeUser():
+=======
+# def authorizeUser():
+>>>>>>> Stashed changes
     #Spotify Authentication Stuff Goes Here
 
 ############################

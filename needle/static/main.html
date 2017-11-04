@@ -5,7 +5,15 @@
     <h3>Rate Your Friends' Spotify Libraries</h3><br />
 </div>
 <div class = "container">
-   Hello, Main!
+  <form action="/main" method="post">
+    <div>
+      <label for="name">Username:</label>
+      <input type="text" id="name" name="user_name">
+    </div>
+    <div class="button">
+      <button type="submit">Login</button>
+    </div>
+    <var>u_name = document.getElementByID("user_name").value;</var>
 </div>
 
 {% endblock %}
