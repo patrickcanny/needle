@@ -15,14 +15,20 @@ class playlist(object):
         self.username = username
         self.playlists = []
 
+    def getinfo(self, source):
+        data = getattr(self, source)
+        return data
+
     def get_playlists(self):
         count = 0
         while count < len(spotify.user_playlists(self.username, limit=50, offset=0)[u'items']):
             word = spotify.user_playlists(self.username, limit = 50, offset = 0)[u'items'][count][u'name']
+            word = str(word)
             self.playlists.append(word)
             count = count + 1
+
         print self.playlists
-        return(self.playlists)
+
 
     def playlists_songs(self):
         count = 0
@@ -38,10 +44,16 @@ class songs(object):
         self.playlist = playlist
         self.playlist_id = None
         self.songs = []
+        self.rating = 0
+
+    def getinfo(self, source):
+        data = getattr(self, source)
+        return data
 
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
+        
 
     def get_songs(self, username):
         songs = spotify.user_playlist(username, playlist_id=self.playlist_id, fields=None)
@@ -53,6 +65,17 @@ class songs(object):
                 song_info.get_info(info, songs, count)
                 count = count + 1
 
+    def calculate_rating(self):
+            total = 0
+            votes = 0
+            for index in self.songs:
+                total = total + song_info.pos_votes(index)
+                votes = votes + song_info.vote_num(index)
+            if votes != 0:
+                self.rating = (total / votes)
+            else:
+                self.rating = 0
+
 class song_info(object):
 
     def __init__(self,song):
@@ -60,8 +83,8 @@ class song_info(object):
         self.artists = []
         self.album = None
         self.art = None
-        self.vote_num = None
-        self.pos_votes = None
+        self.vote_num = 0
+        self.pos_votes = 0
 
     def get_info(self, data, value):
         count = 0
@@ -70,14 +93,17 @@ class song_info(object):
             count = count + 1
 
         self.album = data[u'tracks'][u'items'][value][u'track'][u'album'][u'name']
-
-
-        '''self.art =
-        self.vote_num =
-        self.pos_votes ='''
+        self.art = data[u'tracks'][u'items'][value][u'track'][u'album'][u'images'][0][u'url']
 
 
 
 instance = playlist(username)
 playlist.get_playlists(instance)
 playlist.playlists_songs(instance)
+for playlist in instance.playlists:
+    test = songs(playlist)
+    songs.calculate_rating(test)
+
+print songs('test3').getinfo("playlist_id")
+print songs('test2').getinfo("songs")
+print songs('test1').getinfo("rating")
