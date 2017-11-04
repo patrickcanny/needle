@@ -6,7 +6,8 @@ import os
 
 client_credentials_manager = SpotifyClientCredentials()
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-username = raw_input("Input Username: ")
+#username = raw_input("Input Username: ")
+username = 'm31omzzv1u9w52lrj4szxi8qq'
 
 class playlist(object):
 
@@ -23,50 +24,36 @@ class playlist(object):
         print self.playlists
         return(self.playlists)
 
-    """def get_songs(self, playlist_name):
-        if playlist_name in self.playlists:
-            songs = []
-            user_playlist_tracks(user, playlist_id=None, fields=None, limit=100, offset=0, market=None)
-
-        else:
-            print "Enter valid playlist name" """
+    def playlists_songs(self):
+        count = 0
+        for index in self.playlists:
+            case = songs(index)
+            songs.get_playlist_id(case, count, self.username)
+            songs.get_songs(case, self.username)
+            count = count + 1
 
 class songs(object):
 
     def __init__(self, playlist):
         self.playlist = playlist
+        self.playlist_id = None
         self.songs = []
 
-    #def get_songs(self):
+    def get_playlist_id(self, count, username):
+        tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
+        self.playlist_id = tag[-22:]
 
+    def get_songs(self, username):
+        songs = spotify.user_playlist(username, playlist_id=self.playlist_id, fields=None)
+        print songs
+
+class song_info(object):
+
+    def __init__(self,song):
+        self.song = song
+        
 
 
 instance = playlist(username)
 playlist.get_playlists(instance)
-
-print spotify.user_playlists(username, limit=50, offset=0)
-
-
-
-"""    def __init__(self, playlist_name):
-        self.playlist_name = playlist_name
-
-    def songs_in_playlist(self, playlist_name):
-"""
-
-
-'''if __name__ == '__main__':
-    if token:
-        count = 0
-        while count < len(spotify.user_playlists(username, limit=50, offset=0)[u'items']):
-            print spotify.user_playlists(username, limit=50, offset=0)[u'items'][count][u'name']
-            count = count + 1
-    else:
-        print "Can't get token for", username'''
-
-#if token:
-    #playlist class
-
-#else:
-    #error
-#user_playlist_tracks(user, playlist_id=None, fields=None, limit=100, offset=0, market=None)
+playlist.playlists_songs(instance)
