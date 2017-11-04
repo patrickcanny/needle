@@ -1,19 +1,18 @@
-{% extends '_layout.html' %}
-{% block body %}
+{% extends '_layout.html' %} {% block body %}
 <div class="jumbotron">
-    <h1>Needle</h1>
-    <h3>Rate Your Friends' Spotify Libraries</h3><br />
-</div>
-<div class = "container">
-  <form action="/main" method="post">
-    <div>
-      <label for="name">Username:</label>
-      <input type="text" id="name" name="user_name">
+  <h1>Needle</h1>
+  <h3>Rate Your Friends' Spotify Libraries</h3><br />
+</div class = "container">
+{% from 'includes/_formhelper.html' import render_field %}
+<form action="/playlists" , method="post">
+  <div class="container">
+    <div class="form-group">
+      {{render_field(form.username, class = "form-control")}}
     </div>
-    <div class="button">
-      <button type="submit">Login</button>
-    </div>
-    <var>u_name = document.getElementByID("user_name").value;</var>
+    <p>
+      <input type="submit" class="btn btn-primary" value="Submit" />
+    </p>
+</form>
 </div>
 
 {% endblock %}
