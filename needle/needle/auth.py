@@ -7,7 +7,7 @@ import os
 client_credentials_manager = SpotifyClientCredentials()
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 #username = raw_input("Input Username: ")
-username = 'm31omzzv1u9w52lrj4szxi8qq'
+# username = 'm31omzzv1u9w52lrj4szxi8qq'
 
 class playlist(object):
 
@@ -78,6 +78,6 @@ class song_info(object):
 
 
 
-instance = playlist(username)
-playlist.get_playlists(instance)
-playlist.playlists_songs(instance)
+# instance = playlist(username)
+# playlist.get_playlists(instance)
+# playlist.playlists_songs(instance)
