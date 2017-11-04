@@ -4,9 +4,12 @@ import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 
-client_credentials_manager = SpotifyClientCredentials()
-spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-username = raw_input("Input Username: ")
+
+def getUser(_username):
+    client_credentials_manager = SpotifyClientCredentials()
+    spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    username = _username
+    return spotify
 
 class playlist(object):
 
@@ -38,35 +41,3 @@ class songs(object):
         self.songs = []
 
     #def get_songs(self):
-
-
-
-instance = playlist(username)
-playlist.get_playlists(instance)
-
-print spotify.user_playlists(username, limit=50, offset=0)
-
-
-
-"""    def __init__(self, playlist_name):
-        self.playlist_name = playlist_name
-
-    def songs_in_playlist(self, playlist_name):
-"""
-
-
-'''if __name__ == '__main__':
-    if token:
-        count = 0
-        while count < len(spotify.user_playlists(username, limit=50, offset=0)[u'items']):
-            print spotify.user_playlists(username, limit=50, offset=0)[u'items'][count][u'name']
-            count = count + 1
-    else:
-        print "Can't get token for", username'''
-
-#if token:
-    #playlist class
-
-#else:
-    #error
-#user_playlist_tracks(user, playlist_id=None, fields=None, limit=100, offset=0, market=None)
