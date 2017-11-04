@@ -17,6 +17,7 @@
 		44995CCD1FAD6D310065D06C /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CCC1FAD6D300065D06C /* SpotifyAudioPlayback.framework */; };
 		44995CCF1FAD6D380065D06C /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CCE1FAD6D380065D06C /* SpotifyAuthentication.framework */; };
 		44995CD11FAD6D4B0065D06C /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CD01FAD6D4B0065D06C /* SpotifyMetadata.framework */; };
+		44995CD51FAD6E500065D06C /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44995CD41FAD6E500065D06C /* BridgeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,9 @@
 		44995CCC1FAD6D300065D06C /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		44995CCE1FAD6D380065D06C /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		44995CD01FAD6D4B0065D06C /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		44995CD21FAD6E500065D06C /* needle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "needle-Bridging-Header.h"; sourceTree = "<group>"; };
+		44995CD31FAD6E500065D06C /* BridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
+		44995CD41FAD6E500065D06C /* BridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,9 @@
 				44995C9B1FAD66CA0065D06C /* Assets.xcassets */,
 				44995C9D1FAD66CA0065D06C /* LaunchScreen.storyboard */,
 				44995CA01FAD66CA0065D06C /* Info.plist */,
+				44995CD31FAD6E500065D06C /* BridgeViewController.h */,
+				44995CD41FAD6E500065D06C /* BridgeViewController.m */,
+				44995CD21FAD6E500065D06C /* needle-Bridging-Header.h */,
 			);
 			path = needle;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 				TargetAttributes = {
 					44995C901FAD66CA0065D06C = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 					44995CA41FAD66CA0065D06C = {
@@ -271,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44995CD51FAD6E500065D06C /* BridgeViewController.m in Sources */,
 				44995C971FAD66CA0065D06C /* ViewController.swift in Sources */,
 				44995C951FAD66CA0065D06C /* AppDelegate.swift in Sources */,
 			);
@@ -438,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,6 +457,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hackkstate.needle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "needle/needle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -465,6 +478,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hackkstate.needle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "needle/needle-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

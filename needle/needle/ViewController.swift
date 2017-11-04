@@ -9,6 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var auth = SPTAuth.defaultInstance()!
+    var session:SPTSession!
+    
+    var player: SPTAudioStreamingController?
+    var loginUrl: URL?
+    
+    func setup(){
+        SPTAuth.defaultInstance().clientID = "76dc1bdb68414251b6ed9380f7b7b1be"
+        SPTAuth.defaultInstance().redirectURL = URL(string: "needle://returnAfterLogin")
+        SPTAuth.defaultInstance().requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        loginUrl = SPTAuth.defaultInstance().spotifyWebAuthenticationURL()
+        
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
