@@ -71,7 +71,7 @@ class song_info(object):
 
         self.album = data[u'tracks'][u'items'][value][u'track'][u'album'][u'name']
 
-
+        
         '''self.art =
         self.vote_num =
         self.pos_votes ='''
