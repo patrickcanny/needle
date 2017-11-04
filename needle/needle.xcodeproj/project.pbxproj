@@ -14,6 +14,9 @@
 		44995C9F1FAD66CA0065D06C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44995C9D1FAD66CA0065D06C /* LaunchScreen.storyboard */; };
 		44995CAA1FAD66CA0065D06C /* needleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44995CA91FAD66CA0065D06C /* needleTests.swift */; };
 		44995CB51FAD66CA0065D06C /* needleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44995CB41FAD66CA0065D06C /* needleUITests.swift */; };
+		44995CCD1FAD6D310065D06C /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CCC1FAD6D300065D06C /* SpotifyAudioPlayback.framework */; };
+		44995CCF1FAD6D380065D06C /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CCE1FAD6D380065D06C /* SpotifyAuthentication.framework */; };
+		44995CD11FAD6D4B0065D06C /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44995CD01FAD6D4B0065D06C /* SpotifyMetadata.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		44995CB01FAD66CA0065D06C /* needleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = needleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44995CB41FAD66CA0065D06C /* needleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = needleUITests.swift; sourceTree = "<group>"; };
 		44995CB61FAD66CA0065D06C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44995CCC1FAD6D300065D06C /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		44995CCE1FAD6D380065D06C /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		44995CD01FAD6D4B0065D06C /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44995CCD1FAD6D310065D06C /* SpotifyAudioPlayback.framework in Frameworks */,
+				44995CD11FAD6D4B0065D06C /* SpotifyMetadata.framework in Frameworks */,
+				44995CCF1FAD6D380065D06C /* SpotifyAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +86,9 @@
 		44995C881FAD66CA0065D06C = {
 			isa = PBXGroup;
 			children = (
+				44995CD01FAD6D4B0065D06C /* SpotifyMetadata.framework */,
+				44995CCE1FAD6D380065D06C /* SpotifyAuthentication.framework */,
+				44995CCC1FAD6D300065D06C /* SpotifyAudioPlayback.framework */,
 				44995C931FAD66CA0065D06C /* needle */,
 				44995CA81FAD66CA0065D06C /* needleTests */,
 				44995CB31FAD66CA0065D06C /* needleUITests */,
@@ -427,6 +439,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = needle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hackkstate.needle;
@@ -441,6 +457,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = needle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hackkstate.needle;
