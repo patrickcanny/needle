@@ -52,7 +52,7 @@ class songs(object):
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
-<<<<<<< HEAD
+
         return (self.playlist_id)
 
     def get_songs(self, username):
@@ -96,7 +96,9 @@ class song_info(object):
         while count < len(data[u'tracks'][u'items'][value][u'track'][u'artists']):
             self.artists.append(data[u'tracks'][u'items'][value][u'track'][u'artists'][count][u'name'])
             count = count + 1
-
+        print data[u'owner'][u'display_name']
+        print data[u'href']
+        test = spotify.current_user(token)
         self.album = data[u'tracks'][u'items'][value][u'track'][u'album'][u'name']
         self.art = data[u'tracks'][u'items'][value][u'track'][u'album'][u'images'][0][u'url']
         return(self.album, self.art, self.artists)
