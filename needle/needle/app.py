@@ -16,6 +16,12 @@ app.config['MYSQL_DB'] = 'needle'
 app.config['MYSQL_CURSOR'] = 'DictCursor'
 
 mysql = MySQL(app)
+# ############################
+# #                   Functions
+# ############################
+def stripURI(fullURI):
+    new = fullURI.replace('spotify:user:', '')
+    return new
 
 # ############################
 # #                   Classes
@@ -37,10 +43,10 @@ def about():
 @app.route("/main", methods = ['GET','POST'])
 def main():
     form = UserForm(request.form)
-    session['username'] = form.username.data
 
     if request.method == 'POST' and form.validate():
-        user = form.username.data
+        session['username'] = stripURI(form.username.data)
+        user = stripURI(form.username.data)
         PL = playlist(user)
         _playlists = PL.get_playlists()
 
@@ -105,6 +111,7 @@ def viewsongs(playlist_name):
     SL = []
     SL[:] = []
     app.logger.info(SL)
+    #TODO: Figure this Function Out...
     SL = songs_in_list(un)
     app.logger.info(SL)
     for song in SL:
@@ -112,7 +119,7 @@ def viewsongs(playlist_name):
         playlist = playlist_name
         app.logger.info(playlist)
 
-        #Add Everything to DB
+        #Put all the stuff in DB
         # var = cur.execute("SELECT * FROM Songs WHERE playlist=%s;", [playlist_name])
         cur.execute("INSERT INTO Songs(song_name, playlist) VALUES(%s, %s)", (song_name, playlist))
         mysql.connection.commit()
