@@ -4,6 +4,45 @@
     <meta charset="utf-8">
     <title>Spotify App</title>
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="page.css" rel="stylesheet" type="text/css">
+    <style>
+    body {margin:0;}
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: rgb(255, 193, 67);
+}
+
+.title {
+  font-size: 75px;
+
+}
+    </style>
   </head>
   <body>
     {% include './includes/_navbar.html' %}

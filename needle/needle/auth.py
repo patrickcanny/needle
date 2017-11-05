@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import sys
 import spotipy
 import spotipy.util as util
@@ -53,7 +54,7 @@ class songs(object):
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
-        
+
 
     def get_songs(self, username):
         songs = spotify.user_playlist(username, playlist_id=self.playlist_id, fields=None)

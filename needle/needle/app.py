@@ -34,7 +34,11 @@ class UserForm(Form):
 def login():
     return render_template("login.html")
 
-@app.route("/main", methods = ['POST', 'GET'])
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/main", methods = ['GET','POST'])
 def main():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
