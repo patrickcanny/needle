@@ -35,7 +35,7 @@ is wonderful.
   5. Use Command `pip install mysqlclient` if you're using the MySQL DB
   6. Use `python app.py` to launch the server, and navigate to the local host to interact with the application
 
-  Since this App is in pre-production, the MySQL DB would need an initial setup on your end. We apologize for the hassle!
+  Since this App is in pre-production, the MySQL DB would need an initial setup on your end.
 
 # References
 
@@ -46,6 +46,6 @@ is wonderful.
 - MySQL: https://dev.mysql.com/doc/
 - Bootstrap: http://getbootstrap.com
 
-Special thanks to Hack K-State for hosting a great event!
+Special thanks to the Hack K-State team for hosting a great event!
 
 -Patrick Canny
