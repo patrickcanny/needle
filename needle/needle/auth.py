@@ -53,6 +53,7 @@ class songs(object):
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
+<<<<<<< HEAD
         return (self.playlist_id)
 
     def get_songs(self, username):
