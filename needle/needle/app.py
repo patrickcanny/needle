@@ -1,6 +1,6 @@
 import random
 from flask import Flask, render_template, request, flash, redirect, url_for, session, logging
-from auth import playlist, songs, song_info
+from auth import playlist, songs, song_info, songs_in_list
 from wtforms import Form, StringField, validators
 from flask_mysqldb import MySQL
 
@@ -24,10 +24,6 @@ class UserForm(Form):
          username = StringField(u'Enter Spotify User To Roast:', validators = [validators.input_required()])
 
 ############################
-#                   Functions
-############################
-
-############################
 #                   Routes
 ############################
 @app.route("/")
@@ -49,7 +45,7 @@ def main():
         _playlists = PL.get_playlists()
 
         for _playlist in _playlists:
-            playlist_name = _playlist
+            playlist_name = _playlist.encode('utf-8')
             username = user
             cur = mysql.connection.cursor()
 
@@ -98,28 +94,63 @@ def downvote(playlist_name):
     cur.close()
     return redirect(url_for('playlists'))
 
+
+
 @app.route("/view/<string:playlist_name>")
 def viewsongs(playlist_name):
-    SL = songs(playlist_name)
-    playlist_id = SL.get_playlist_id(0, session.get('username', None))
-    _songs = SL.get_songs(session.get('username', None))
-    for _song in _songs:
-        song_name = _song
+    cur = mysql.connection.cursor()
+
+    #Cycle Through Songs
+    un = session.get('username', None)
+    SL = []
+    SL[:] = []
+    app.logger.info(SL)
+    SL = songs_in_list(un)
+    app.logger.info(SL)
+    for song in SL:
+        song_name = song.encode('utf-8')
         playlist = playlist_name
-        artist = song_info(song).get_info()[2]
+        app.logger.info(playlist)
 
-        cur = mysql.connection.cursor()
+        #Add Everything to DB
+        # var = cur.execute("SELECT * FROM Songs WHERE playlist=%s;", [playlist_name])
+        cur.execute("INSERT INTO Songs(song_name, playlist) VALUES(%s, %s)", (song_name, playlist))
+        mysql.connection.commit()
+    cur.close()
 
-        var = cur.execute("SELECT * FROM Songs WHERE playlist_name=%s;", [playlist_name])
 
-        if var == 0:
-            cur.execute("INSERT INTO Songs(song_name, playlist, artist) VALUES(%s, %s, %s)", (song_name, playlist_name, artist))
-            mysql.connection.commit()
-            cur.close()
-        else:
-            continue
+    # REQUERY To get all the songs again
+    app.logger.info("about to requery...")
+    cur = mysql.connection.cursor()
+    app.logger.info(playlist_name)
+    result = cur.execute("SELECT * FROM Songs WHERE playlist=%s;", [playlist_name])
+    mysongs = cur.fetchall()
+    cur.close()
 
-    return redirect(url_for('view/<string:playlist_name>'))
+    if result > 0:
+        return render_template('view.html', songs = mysongs, playlistname = playlist_name)
+    else:
+        return redirect(url_for('index'))
+
+@app.route ("/upvotesong/<string:song_name>")
+def upvotesong(song_name):
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE Songs SET positive_votes = positive_votes+1 WHERE song_name = %s", [song_name])
+    mysql.connection.commit()
+    flash('Upvoted!', 'success')
+    cur.close()
+    return redirect(url_for('playlists'))
+
+@app.route ("/downvotesong/<string:song_name>")
+def downvotesong(song_name):
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE Songs SET positive_votes = negative_votes+1 WHERE song_name = %s", [song_name])
+    mysql.connection.commit()
+    flash('Downvoted!', 'danger')
+    cur.close()
+    return redirect(url_for('playlists'))
+
+
 
 if __name__ == "__main__":
     app.secret_key = 'secret123'

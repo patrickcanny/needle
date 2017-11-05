@@ -1,0 +1,25 @@
+{% extends '_layout.html' %}
+
+  {% block body %}
+  <div class = "container">
+    <br /><br />
+  </div>
+  <table style ="width: 100%" id="spotifytable">
+    <thead>
+    <tr>
+      <th>Song Name</th>
+      <th>Favorability</th>
+      <th>Downvote</th>
+      <th>Upvote</th>
+    </tr>
+    </thead>
+    {% for d in songs %}
+    <tr>
+      <td>{{d[1]}}</td>
+      <td>{{(d[4]-d[5])/(d[5]+d[4])*100}}</td>
+      <td><a href="/downvotesong/{{d[1]}}" class="btn btn-default pull-right"><img width=40px src="https://openclipart.org/download/285479/Thumbs-down-Circle.svg"></a></td>
+      <td><a href="/upvotesong/{{d[1]}}" class="btn btn-default pull-right"><img width=40px src="http://wikiclipart.com/wp-content/uploads/2016/10/Thumbs-up-clipart-2.png"></a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endblock %}

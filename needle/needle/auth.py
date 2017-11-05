@@ -8,6 +8,8 @@ client_credentials_manager = SpotifyClientCredentials()
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 # username = raw_input("Input Username: ")
 
+
+
 class playlist(object):
 
     def __init__(self, username):
@@ -105,6 +107,18 @@ class song_info(object):
         return(self.album, self.art, self.artists)
 
 
+def songs_in_list(username):
+    songz = []
+    tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][0][u'uri']
+    playlist_id = tag[-22:]
+    _songs = spotify.user_playlist(username, playlist_id)
+    if len(_songs[u'tracks'][u'items']) > 0:
+        count = 0
+        while count < len(_songs[u'tracks'][u'items']):
+            songz.append(_songs[u'tracks'][u'items'][count][u'track'][u'name'])
+            #print _songs[u'tracks'][u'items'][count][u'track'][u'name']
+            count = count + 1
+    return songz
 
 
 #
