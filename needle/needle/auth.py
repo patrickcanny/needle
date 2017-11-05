@@ -7,7 +7,7 @@ import os
 client_credentials_manager = SpotifyClientCredentials()
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 #username = raw_input("Input Username: ")
-# username = 'm31omzzv1u9w52lrj4szxi8qq'
+username = 'm31omzzv1u9w52lrj4szxi8qq'
 
 class playlist(object):
 
@@ -27,7 +27,7 @@ class playlist(object):
             self.playlists.append(word)
             count = count + 1
 
-        print self.playlists
+        return(self.playlists)
 
 
     def playlists_songs(self):
@@ -38,8 +38,8 @@ class playlist(object):
             songs.get_songs(case, self.username)
             count = count + 1
 
-class songs(object):
 
+class songs(object):
     def __init__(self, playlist):
         self.playlist = playlist
         self.playlist_id = None
@@ -53,7 +53,7 @@ class songs(object):
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
-        
+        return (self.playlist_id)
 
     def get_songs(self, username):
         songs = spotify.user_playlist(username, playlist_id=self.playlist_id, fields=None)
@@ -75,6 +75,7 @@ class songs(object):
                 self.rating = (total / votes)
             else:
                 self.rating = 0
+            return(self.rating)
 
 class song_info(object):
 
@@ -86,6 +87,10 @@ class song_info(object):
         self.vote_num = 0
         self.pos_votes = 0
 
+    def getinfo(self, source):
+        data = getattr(self, source)
+        return data
+
     def get_info(self, data, value):
         count = 0
         while count < len(data[u'tracks'][u'items'][value][u'track'][u'artists']):
@@ -94,22 +99,13 @@ class song_info(object):
 
         self.album = data[u'tracks'][u'items'][value][u'track'][u'album'][u'name']
         self.art = data[u'tracks'][u'items'][value][u'track'][u'album'][u'images'][0][u'url']
+        return(self.album, self.art, self.artists)
 
 
 
-<<<<<<< HEAD
 instance = playlist(username)
 playlist.get_playlists(instance)
 playlist.playlists_songs(instance)
 for playlist in instance.playlists:
     test = songs(playlist)
     songs.calculate_rating(test)
-
-print songs('test3').getinfo("playlist_id")
-print songs('test2').getinfo("songs")
-print songs('test1').getinfo("rating")
-=======
-# instance = playlist(username)
-# playlist.get_playlists(instance)
-# playlist.playlists_songs(instance)
->>>>>>> 61aeba814e5aa302c658f64561bdf033f1680026
