@@ -17,11 +17,11 @@ app.config['MYSQL_CURSOR'] = 'DictCursor'
 
 mysql = MySQL(app)
 
-############################
-#                   Classes
-############################
+# ############################
+# #                   Classes
+# ############################
 class UserForm(Form):
-    username = StringField(u'Enter Spotify User To Roast:', validators = [validators.input_required()])
+         username = StringField(u'Enter Spotify User To Roast:', validators = [validators.input_required()])
 
 ############################
 #                   Functions
