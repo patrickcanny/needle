@@ -41,6 +41,8 @@ def about():
 @app.route("/main", methods = ['GET','POST'])
 def main():
     form = UserForm(request.form)
+    session['username'] = form.username.data
+
     if request.method == 'POST' and form.validate():
         user = form.username.data
         PL = playlist(user)
@@ -48,19 +50,28 @@ def main():
         for _playlist in _playlists:
             playlist_name = _playlist
             username = user
-
             cur = mysql.connection.cursor()
             cur.execute("INSERT INTO Playlists(user_name, playlist_name) VALUES(%s, %s)", (username, playlist_name))
-
             mysql.connection.commit()
             cur.close()
-            redirect(url_for('main'))
-        flash('Added!')
-    return render_template("main.html", form= form)
+
+        flash('Added!', 'success')
+        return redirect(url_for('playlists'))
+    return render_template('main.html', form = form)
 
 @app.route("/playlists", methods = ['GET','POST'])
 def playlists():
-    return
+    cur = mysql.connection.cursor()
+    username = session.get('username', None)
+    result = cur.execute("SELECT * FROM Playlists WHERE user_name=%s;", [username])
+    playlists = cur.fetchall()
+    cur.close()
+    if result > 0:
+        return render_template("playlists.html", playlists=playlists)
+    else:
+        msg = "No Playlists Found!"
+        return render_template("playlists.html", msg=msg)
+
 
 if __name__ == "__main__":
     app.secret_key = 'secret123'

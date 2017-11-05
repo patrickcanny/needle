@@ -1,0 +1,23 @@
+{% extends '/_layout.html' %}
+{% block body %}
+<table class = "table table-striped">
+  <tr>
+    <th>Playlist Name</th>
+    <th>User Name</th>
+    <th>Favorability</th>
+    <th>Downvote</th>
+    <th>Upvote</th>
+    <th>View Songs</th>
+  </tr>
+  {% for d in playlists %}
+  <tr>
+    <td>{{d[2]}}</td>
+    <td>{{d[1]}}</td>
+    <td>{{d[3]/d[4]}}</td>
+    <td><a href="applyDownVote" class="btn btn-default pull-right">DownVote</a></td>
+    <td><a href="applyUpVote" class="btn btn-default pull-right">UpVote</a></td>
+    <td><a href="view/<d[2]>" class="btn btn-default pull-right">View Songs</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

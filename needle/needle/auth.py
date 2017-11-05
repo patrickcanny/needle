@@ -6,7 +6,7 @@ import os
 
 client_credentials_manager = SpotifyClientCredentials()
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-username = raw_input("Input Username: ")
+# username = raw_input("Input Username: ")
 
 class playlist(object):
 
@@ -52,7 +52,6 @@ class songs(object):
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
-<<<<<<< HEAD
         return (self.playlist_id)
 
     def get_songs(self, username):
@@ -103,9 +102,9 @@ class song_info(object):
 
 
 
-instance = playlist(username)
-playlist.get_playlists(instance)
-playlist.playlists_songs(instance)
-for playlist in instance.playlists:
-    test = songs(playlist)
-    songs.calculate_rating(test)
+# instance = playlist(username)
+# playlist.get_playlists(instance)
+# playlist.playlists_songs(instance)
+# for playlist in instance.playlists:
+#     test = songs(playlist)
+#     songs.calculate_rating(test)
