@@ -63,6 +63,7 @@ class songs(object):
                 info = song_info(songs[u'tracks'][u'items'][count][u'track'][u'name'])
                 song_info.get_info(info, songs, count)
                 count = count + 1
+        return self.songs
 
     def calculate_rating(self):
             total = 0
@@ -110,4 +111,3 @@ class song_info(object):
 # # instance = playlist(username)
 # # playlist.get_playlists(instance)
 # # playlist.playlists_songs(instance)
->>>>>>> Stashed changes

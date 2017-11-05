@@ -1,5 +1,8 @@
 {% extends '/_layout.html' %}
 {% block body %}
+<div class = "container">
+  <br /><br />
+</div>
 <table style ="width: 100%" id="spotifytable">
   <thead>
   <tr>
@@ -15,10 +18,10 @@
   <tr>
     <td>{{d[2]}}</td>
     <td>{{d[1]}}</td>
-    <td>{{d[3]/d[4]}}</td>
-    <td><a href="applyDownVote" class="btn btn-default pull-right"><img src="https://openclipart.org/download/285479/Thumbs-down-Circle.svg"></a></td>
-    <td><a href="applyUpVote" class="btn btn-default pull-right"><img src="http://wikiclipart.com/wp-content/uploads/2016/10/Thumbs-up-clipart-2.png"></a></td>
-    <td><a href="view/<d[2]>" class="btn btn-default pull-right">View Songs</a></td>
+    <td>{{(d[3]-d[4])/(d[4]+d[3])*100}}</td>
+    <td><a href="downvote/{{d[2]}}" class="btn btn-default pull-right"><img width=40px src="https://openclipart.org/download/285479/Thumbs-down-Circle.svg"></a></td>
+    <td><a href="upvote/{{d[2]}}" class="btn btn-default pull-right"><img width=40px src="http://wikiclipart.com/wp-content/uploads/2016/10/Thumbs-up-clipart-2.png"></a></td>
+    <td><a href="view/{{d[2]}}" class="btn btn-default pull-right">View Songs</a></td>
   </tr>
   {% endfor %}
 </table>
