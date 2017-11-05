@@ -49,6 +49,20 @@ class songs(object):
         data = getattr(self, source)
         return data
 
+    def songs_in_list(self, username):
+        songz = []
+        tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][0][u'uri']
+        playlist_id = tag[-22:]
+        _songs = spotify.user_playlist(username, playlist_id)
+        if len(songs[u'tracks'][u'items']) > 0:
+            count = 0
+            while count < len(songs[u'tracks'][u'items']):
+                songz.append(songs[u'tracks'][u'items'][count][u'track'][u'name'])
+                print songs[u'tracks'][u'items'][count][u'track'][u'name']
+                count = count + 1
+
+
+
     def get_playlist_id(self, count, username):
         tag = spotify.user_playlists(username, limit = 50, offset = 0)[u'items'][count][u'uri']
         self.playlist_id = tag[-22:]
@@ -64,6 +78,7 @@ class songs(object):
                 info = song_info(songs[u'tracks'][u'items'][count][u'track'][u'name'])
                 song_info.get_info(info, songs, count)
                 count = count + 1
+        print self.songs
 
     def calculate_rating(self):
             total = 0
@@ -98,7 +113,6 @@ class song_info(object):
             count = count + 1
         print data[u'owner'][u'display_name']
         print data[u'href']
-        test = spotify.current_user(token)
         self.album = data[u'tracks'][u'items'][value][u'track'][u'album'][u'name']
         self.art = data[u'tracks'][u'items'][value][u'track'][u'album'][u'images'][0][u'url']
         return(self.album, self.art, self.artists)
