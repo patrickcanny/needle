@@ -1,6 +1,6 @@
 # needle
 It's like Rotten Tomatoes, except for Spotify.
-more
+
 # About
 Needle is a web application that allows users to rate their friends' playlists. After obtaining the URI from a Spotify Profile,
 any Spotify user can be searched. A list of their public playlists will be generated, along with a favorability
