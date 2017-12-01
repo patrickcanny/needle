@@ -48,4 +48,3 @@ is wonderful.
 
 Special thanks to the Hack K-State team for hosting a great event!
 
--Patrick Canny
